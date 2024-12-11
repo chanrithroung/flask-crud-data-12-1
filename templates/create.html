@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block title %} Admin | Create User {% endblock %}
-
 {% block content %}
    <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-4">
                 <div class="p-4 mx-auto mt-5 rounded-5 shadow-lg">
                     <h1>Create User</h1>
-                    <form action="{{}}" method="get">    
+                    <form action="{{ url_for('submit') }}" method="get">    
                         <div class="mb-2">
                             <label for="firstname">First Name</label>
                             <input name="first-name" class="form-control" placeholder="Frist name" required id="firstname" type="text">

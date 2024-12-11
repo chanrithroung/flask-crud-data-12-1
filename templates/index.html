@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            {% for user in users %}
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-3">
+                    <div class="p-5 h-100 rounded-3 shadow">
+                        <h4>Firt Name: {{ user[1] }} </h4>
+                        <h4>Last name: {{ user[2] }}</h4>
+                        <p>Email: {{ user[3] }}</p>
+                        <hr>
+                        <button class="btn btn-primary mt-4"> Detail </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
