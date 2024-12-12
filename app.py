@@ -21,7 +21,7 @@ def get_db_connection():
 def index():
     con = get_db_connection()
     cursor = con.cursor()
-    cursor.execute(""" SELECT * FROM users""")
+    cursor.execute(""" SELECT * FROM users ORDER BY id ASC """)
     users = cursor.fetchall()
     return render_template("index.html", users=users)
 
@@ -63,11 +63,29 @@ def update_user(id):
     return render_template('update.html', user=user)
 
 
+@app.route("/update-submit", methods=["GET", "POST"])
+def update_submit():
+    id = request.form['id']
+    first_name = request.form['first-name']
+    last_name = request.form['last-name']
+    email = request.form['email']
+
+    query = f"UPDATE users SET first_name = '{first_name}', last_name = '{last_name}', email = '{email}' WHERE id = {id};"
+    con = get_db_connection()
+    cursor = con.cursor()
+    cursor.execute(query=query)
+    con.commit()
+    cursor.close()
+    con.close()
+
+    return redirect('list-users')
+
+
 @app.route("/list-users")
 def list_users():
     con = get_db_connection()
     cursor = con.cursor()
-    cursor.execute(""" SELECT * FROM users""")
+    cursor.execute("""SELECT * FROM users ORDER BY id ASC""")
     users = cursor.fetchall()
     return render_template("list_users.html", users=users)
 
