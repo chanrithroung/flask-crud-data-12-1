@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, jsonify, redirect
 import psycopg2
-import password
 app = Flask(__name__)
 
 DB_HOST = "127.0.0.1" # or localhost
 DB_NAME = "db_12_1"
 DB_USER = "postgres"
-DB_PASSWORD = password.password
+DB_PASSWORD =  "24022004"
+
 
 def get_db_connection():
     return psycopg2.connect(
@@ -49,6 +49,18 @@ def submit():
         cursor.close()
 
         return redirect("/create")
+
+@app.route("/update-user/<id>")
+def update_user(id):
+    con = get_db_connection()
+    cursor = con.cursor()
+    qeury = f"SELECT * FROM users WHERE id =  {id};"
+    cursor.execute(query=qeury)
+    con.commit()
+    user = cursor.fetchall()
+    cursor.close()
+    con.close()
+    return render_template('update.html', user=user)
 
 
 @app.route("/list-users")
