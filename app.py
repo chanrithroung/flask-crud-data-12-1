@@ -50,12 +50,6 @@ def submit():
 
         return redirect("/create")
 
-    # return jsonify({
-    #     "first-name": first_name,
-    #     "last_name": last_name,
-    #     "email": email
-    # })
-
 
 @app.route("/list-users")
 def list_users():
