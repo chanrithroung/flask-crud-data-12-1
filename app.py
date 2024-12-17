@@ -81,6 +81,23 @@ def update_submit():
     return redirect('list-users')
 
 
+# Remove User
+@app.route("/remove-user", methods=["GET", "POST"])
+def remove_user():
+    con = get_db_connection()
+    cursor = con.cursor()
+
+    id = request.form['remove-id']
+
+    query = f"DELETE FROM users WHERE id = '{id}'"
+    cursor.execute( query=query )
+
+    con.commit()
+    cursor.close()
+    con.close()
+
+    return redirect("/list-users")
+
 @app.route("/list-users")
 def list_users():
     con = get_db_connection()
